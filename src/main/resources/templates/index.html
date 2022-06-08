@@ -2,105 +2,102 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProductsPage</title>
+    <link th:href="@{/style.css}" rel="stylesheet"/>
 </head>
 <body>
-<h1 th:text="#{welcome.message(${string})}"></h1>
-<table border="1" style="width: 500px">
-    <thead>
-    <tr>
-        <td style="text-align:center">Id</td>
-        <td style="text-align:center">Title</td>
-        <td style="text-align:center">Price</td>
-        <th style="text-align:center">Update</th>
-        <th style="text-align:center">Delete</th>
-        <th style="text-align:center">Add to Cart</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="product: ${products}">
-        <td th:text="${product.id}"/>
-        <td th:text="${product.title}"/>
-        <td th:text="${product.price}"/>
-        <td style="width: 60px; text-align:center">
-            <form th:action="@{/v1/products/edit/{id}(id=${product.id})}" th:method="get">
-                <input type="hidden" name="id" th:value="${product.id}"/>
-                <button type="submit">Update</button>
-            </form>
-        </td>
-        <td style="width: 60px; text-align:center">
-            <form th:action="@{/v1/products/delete}" th:method="delete">
-                <input type="hidden" name="id" th:value="${product.id}"/>
-                <button type="submit">Delete</button>
-            </form>
-        </td>
-        <td style="width: 60px; text-align:center">
-            <form th:action="@{/v1/products/addcart}" th:method="post">
-                <input type="hidden" name="id" th:value="${product.id}"/>
-                <input type="hidden" name="title" th:value="${product.title}"/>
-                <input type="hidden" name="price" th:value="${product.price}"/>
-                <button type="submit">To cart</button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div class="index_block">
+    <div class="table_block">
+        <h1 th:text="#{welcome.message(${string})}"></h1>
+        <table>
+            <thead>
+            <tr>
+                <td class="td_header">Id</td>
+                <td class="td_header">Title</td>
+                <td class="td_header">Price</td>
+                <th class="td_header">Update</th>
+                <th class="td_header">Delete</th>
+                <th class="td_header">Add to Cart</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product: ${products}">
+                <td th:text="${product.id}"/>
+                <td th:text="${product.title}"/>
+                <td th:text="${product.price}"/>
+                <td>
+                    <form th:action="@{/v1/products/edit/{id}(id=${product.id})}" th:method="get">
+                        <input type="hidden" name="id" th:value="${product.id}"/>
+                        <button class="inner_button all_button" type="submit">Update</button>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/v1/products/delete}" th:method="delete">
+                        <input type="hidden" name="id" th:value="${product.id}"/>
+                        <button class="inner_button all_button" type="submit">Delete</button>
+                    </form>
+                </td>
+                <td class="to_cart">
+                    <form th:action="@{/v1/products/addcart}" th:method="post">
+                        <input type="hidden" name="id" th:value="${product.id}"/>
+                        <input type="hidden" name="title" th:value="${product.title}"/>
+                        <input type="hidden" name="price" th:value="${product.price}"/>
+                        <button class="inner_button all_button" type="submit">To cart</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-<h2>Add Product</h2>
-<form th:action="@{/v1/products/addproduct}" method="post">
-    <label>title</label>
-    <input type="text" name="title">
-    <label>price</label>
-    <input type="number" name="price">
-    <input type="submit" value="Create">
-</form>
-<h2>Update Product</h2>
-<form th:action="@{/v1/products/updateproduct}" method="post">
-    <label>id</label>
-    <input type="number" name="id">
-    <label>title</label>
-    <input type="text" name="title">
-    <label>price</label>
-    <input type="number" name="price">
-    <input type="submit" value="Update">
-</form>
-<h2>Cart</h2>
-<table border="1" style="width: 30%">
-    <thead>
-    <tr>
-        <td style="text-align:center">Id</td>
-        <td style="text-align:center">Title</td>
-        <td style="text-align:center">Price</td>
-        <th style="text-align:center">Delete</th>
-    </tr>
-    </thead>
-    <tbody>
-        <tr th:each="cart : ${cart}">
-            <td th:text="${cart.id}"/>
-            <td th:text="${cart.title}"/>
-            <td th:text="${cart.price}"/>
-            <td style="width: 60px; text-align:center">
-                <form th:action="@{/v1/products/deleteidcart}" th:method="delete">
-                    <input type="hidden" name="id" th:value="${cart.id}"/>
-                    <button type="submit">Delete</button>
-                </form>
-        </tr>
-
-<!--        Код для Map коллекции-->
-<!--    <tr th:each="cart : ${cart}">-->
-<!--        <td th:text="${cart.key}"/>-->
-<!--        <td th:text="${cart.value}"/>-->
-<!--        <td style="width: 60px; text-align:center">-->
-<!--            <form th:action="@{/v1/products/deletekeycart}" th:method="delete">-->
-<!--                <input type="hidden" name="key" th:value="${cart.key}"/>-->
-<!--                <button type="submit">Delete</button>-->
-<!--            </form>-->
-<!--    </tr>-->
-
-    </tbody>
-</table>
-<form th:action="@{/v1/products/clearcart}" th:method="delete">
-    <button type="submit">Clear all Cart</button>
-</form>
+    <div class="add_cart_block">
+        <h2>Add Product</h2>
+        <form class="add_form" th:action="@{/v1/products/addproduct}" method="post">
+            <label>Title</label>
+            <input type="text" name="title" required>
+            <label>Price</label>
+            <input type="number" name="price" max="9223372036854775807" required>
+            <input class="outer_button all_button" type="submit" value="Create">
+        </form>
+        <h2>Update Product</h2>
+        <form class="add_form" th:action="@{/v1/products/updateproduct}" method="post">
+            <label>Id</label>
+            <input type="number" name="id" max="9223372036854775807" required>
+            <label>Title</label>
+            <input type="text" name="title" required>
+            <label>Price</label>
+            <input type="number" name="price" max="9223372036854775807" required>
+            <input class="outer_button all_button" type="submit" value="Update">
+        </form>
+        <h2>Cart</h2>
+        <table>
+            <thead>
+            <tr>
+                <td class="td_header">Id</td>
+                <td class="td_header">Title</td>
+                <td class="td_header">Price</td>
+                <th class="td_header">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cart : ${cart}">
+                <td th:text="${cart.id}"/>
+                <td th:text="${cart.title}"/>
+                <td th:text="${cart.price}"/>
+                <td>
+                    <form th:action="@{/v1/products/deleteidcart}" th:method="delete">
+                        <input type="hidden" name="id" th:value="${cart.id}"/>
+                        <button class="inner_button all_button" type="submit">Delete</button>
+                    </form>
+            </tr>
+            </tbody>
+        </table>
+        <form class="add_form" th:action="@{/v1/products/clearcart}" th:method="delete">
+            <button class="outer_button all_button" type="submit">Clear all Cart</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

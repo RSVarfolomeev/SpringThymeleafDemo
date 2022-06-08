@@ -1,0 +1,104 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.index_block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 10px;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+table {
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    border-collapse: collapse;
+    margin: auto;
+}
+
+td, th {
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    padding: 3px;
+}
+
+.td_header {
+    text-align: center;
+}
+
+.add_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.all_button {
+    background-image: linear-gradient(#f7f8fa, #e7e9ec);
+    border-color: #adb1b8 #a2a6ac #8d9096;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    box-shadow: rgba(255, 255, 255, .6) 0 1px 0 inset;
+    box-sizing: border-box;
+    color: #0f1111;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Amazon Ember", Arial, sans-serif;
+    font-size: 13px;
+    outline: 0;
+    overflow: hidden;
+    text-align: center;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+}
+
+.to_cart {
+    width: 50px;
+}
+
+.inner_button {
+    padding: 2px;
+    margin:auto;
+    display:block;
+}
+
+.outer_button {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    padding: 3px;
+    height: 29px;
+}
+
+.all_button:active {
+    border-bottom-color: #a2a6ac;
+}
+
+.all_button:active:hover {
+    border-bottom-color: #a2a6ac;
+}
+
+.all_button:hover {
+    border-color: #a2a6ac #979aa1 #82858a;
+}
+
+.all_button:focus {
+    border-color: #e77600;
+    box-shadow: rgba(228, 121, 17, .5) 0 0 3px 2px;
+    outline: 0;
+}

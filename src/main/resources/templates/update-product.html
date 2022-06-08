@@ -2,10 +2,14 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProductUpdatePage</title>
+    <link th:href="@{/style.css}" rel="stylesheet"/>
 </head>
 <body>
-<form action="#"
+<h2>Update Product</h2>
+<form class="add_form" action="#"
       th:action="@{/v1/products/update/{id}(id=${product.id})}"
       th:object="${product}"
       method="post">
@@ -13,9 +17,9 @@
     <input type="text" th:field="*{title}" id="title" placeholder="Title">
     <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
     <label for="price">Price</label>
-    <input type="text" th:field="*{price}" id="price" placeholder="Price">
+    <input type="number" th:field="*{price}" id="price" max="9223372036854775807" placeholder="Price">
     <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
-    <input type="submit" value="Update">
+    <input class="outer_button all_button" type="submit" value="Update">
 </form>
 </body>
 </html>
